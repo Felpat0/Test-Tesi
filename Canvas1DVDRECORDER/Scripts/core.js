@@ -1,15 +1,17 @@
 var canvas = document.getElementById('mainCanvas');
 var context = canvas.getContext("2d");
 
-function DvdSymbol(x, y, width, height, xSpeed, ySpeed){
-  this.x = x;
-  this.y = y;
-  this.width = width;
-  this.height = height;
-  this.xSpeed = xSpeed;
-  this.ySpeed = ySpeed;
-
-  this.draw = function(){
+class DvdSymbol{
+  constructor(x, y, width, height, speed, xDirection, yDirection){
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.speed = speed;
+    this.xDirection = xDirection;
+    this.yDirection = yDirection;
+  }
+  draw(){
     context.beginPath();
     context.ellipse(this.x, this.y, this.width, this.height, 0, 0, 2 * Math.PI);
     context.stroke();
@@ -17,19 +19,24 @@ function DvdSymbol(x, y, width, height, xSpeed, ySpeed){
     context.fillText("DVD", this.x -40, this.y+15);
   }
 
-  this.move = function(){
-    this.x += this.xSpeed;
-    this.y += this.ySpeed;
+  move(){
+    this.xDirection = this.xDirection/(Math.sqrt(Math.pow(this.xDirection, 2) + Math.pow(this.yDirection, 2)));
+    this.yDirection = this.yDirection/(Math.sqrt(Math.pow(this.xDirection, 2) + Math.pow(this.yDirection, 2)));
+    console.log(this.xDirection + "     " + this.yDirection);
+    this.x += this.speed * this.xDirection;
+    this.y += this.speed * this.yDirection;
+
+
 
     if(this.x - this.width <=0 || this.x + this.width >= canvas.width)
-      this.xSpeed = -this.xSpeed;
+      this.xDirection = -this.xDirection;
 
     if(this.y - this.height <=0 || this.y + this.height >= canvas.height)
-      this.ySpeed = -this.ySpeed;
+      this.yDirection = -this.yDirection;
   }
 }
 
-var ell = new DvdSymbol(300, 300, 100, 50, 3, 2);
+var ell = new DvdSymbol(300, 300, 100, 50, 4, 1.0, 1.0);
 loop();
 function loop(){
   window.requestAnimationFrame(loop);
