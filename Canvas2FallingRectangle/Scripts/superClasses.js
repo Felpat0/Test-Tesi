@@ -11,8 +11,10 @@ class Vector2D{
   }
 
   isNormalized(){
-    //Check if normalized but with error margin
-
+    if(this.x/(1 - Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))) <= 0.1)
+      return true;
+    else
+      return false;
   }
 
   normalize(){
@@ -22,9 +24,8 @@ class Vector2D{
 
 //God class
 class BoxCollider2D{
-  constructor(x, y, width, height){
-    this.x = x;
-    this.y = y;
+  constructor(position, width, height){
+    this.position = position;
     this.width = width;
     this.height = height;
   }
@@ -36,8 +37,8 @@ class BoxCollider2D{
 
 //Class for physical objects
 class PhysicalObject2D extends BoxCollider2D{
-  constructor(x, y, width, height){
-    super(x, y, width, height);
+  constructor(position, width, height){
+    super(position, width, height);
   }
 
   gravityFall(){
