@@ -3,6 +3,23 @@
 //TO DO: complete isColliding function for squares
 //Maybe some machine learning
 
+
+class Vector2D{
+  constructor(x, y){
+    this.x = x;
+    this.y = y;
+  }
+
+  isNormalized(){
+    //Check if normalized but with error margin
+
+  }
+
+  normalize(){
+    this.x = this.x/(Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2)));
+  }
+}
+
 //God class
 class BoxCollider2D{
   constructor(x, y, width, height){
