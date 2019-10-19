@@ -13,9 +13,11 @@ class Rectangle2D extends PhysicalObject2D{
   }
 }
 
+var time = 0;
 var physicalObjects2D = [];
 canvas.addEventListener("click", function(event){
   physicalObjects2D.push(new Rectangle2D(new Vector2D(event.clientX -50, event.clientY -50), 100, 100));
+  time = new Date().getTime();
  });
 
 loop();
@@ -24,7 +26,7 @@ function loop(){
   context.clearRect(0, 0, canvas.width, canvas.height);
    for(var i = 0; i != physicalObjects2D.length; i++){
      physicalObjects2D[i].draw();
-     console.log(physicalObjects2D.length);
+     physicalObjects2D[i].gravityFall(time - new Date().getTime());
    }
 
 }
