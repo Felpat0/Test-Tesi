@@ -43,6 +43,6 @@ class PhysicalObject2D extends BoxCollider2D{
 
   gravityFall(timeLapsed){
     //Formula moto: x = x0+v0*t+1/2*a*t^2
-    this.position.y = this.initialPosition.y/*posizione iniziale*/ + (1/2) * 9.8 * Math.pow(timeLapsed, 2) * 0.00001 /*reduction factor for slowing the square down*/;
+    this.position.y = this.initialPosition.y + (1/2) * 9.8 * Math.pow(timeLapsed / 1000, 2) * 10;
   }
 }
