@@ -1,7 +1,6 @@
 
 //TO DO: create vector2D class with vector functions and fix the code
 //TO DO: complete isColliding function for squares
-//Maybe some machine learning
 
 
 class Vector2D{
@@ -11,8 +10,10 @@ class Vector2D{
   }
 
   isNormalized(){
-    //Check if normalized but with error margin
-
+    if(this.x/(1 - Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2))) <= 0.1)
+      return true;
+    else
+      return false;
   }
 
   normalize(){
@@ -22,9 +23,9 @@ class Vector2D{
 
 //God class
 class BoxCollider2D{
-  constructor(x, y, width, height){
-    this.x = x;
-    this.y = y;
+  constructor(position, width, height){
+    this.position = position;
+    this.initialPosition = position;
     this.width = width;
     this.height = height;
   }
@@ -36,11 +37,12 @@ class BoxCollider2D{
 
 //Class for physical objects
 class PhysicalObject2D extends BoxCollider2D{
-  constructor(x, y, width, height){
-    super(x, y, width, height);
+  constructor(position, width, height){
+    super(position, width, height);
   }
 
-  gravityFall(){
-
+  gravityFall(timeLapsed){
+    //Formula moto: x = x0+v0*t+1/2*a*t^2
+    this.position.y = this.initialPosition.y/*posizione iniziale*/ + (1/2) * 9.8 * Math.pow(timeLapsed, 2) * 0.00001 /*reduction factor for slowing the square down*/;
   }
 }
