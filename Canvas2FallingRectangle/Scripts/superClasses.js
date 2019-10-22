@@ -39,6 +39,7 @@ class BoxCollider2D{
 class PhysicalObject2D extends BoxCollider2D{
   constructor(position, width, height){
     super(position, width, height);
+    var spawnTime = new Date().getTime();
   }
 
   gravityFall(timeLapsed){
