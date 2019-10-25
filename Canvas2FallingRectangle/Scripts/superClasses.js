@@ -30,7 +30,14 @@ class BoxCollider2D{
     this.height = height;
   }
 
-  get isColliding(){
+  isBotColliding(colliders){
+    var i = -1;
+    do{
+      i++;
+      if(/*Math.abs(this.position.x - colliders[i].position.x) < 5 && */Math.abs(this.position.y + this.height - colliders[i].position.y) < 5){
+        return true;
+      }
+    }while(i != colliders.length -1);
     return false;
   }
 }
